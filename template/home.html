@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+
+{% block body %}
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'account_logout' %}">Log Out</a><br>
+    {% endif %}
+    <a href="{% url 'appone:post' %}"> 
+        POST
+    </a>
+    <br><br>
+    <hr>
+        {% for post in posts %}
+
+            {{post.text}} <br>
+            <img src="{{post.image.url}}">
+            <hr>
+
+        {% endfor %}
+
+
+{% endblock %}

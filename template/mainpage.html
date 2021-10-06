@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+{% load static %}
+{% block body %}
+<div class="container1">
+  <div class = "navbar">
+    <div class =" homelink marginnpadding"> 
+      <a class="navlnk" href="">Home</a>
+    </div>
+    <div class =" aboutlink marginnpadding">
+      <a class="navlnk" href="">About</a>
+    </div>
+    <div class="logoicon marginnpadding">
+      <img src="{% static 'projone/ideabialogo.jpg' %}" alt="logo" width="60" height="50" >
+    </div>
+    <div class =" contactlink marginnpadding">
+      <a class="navlnk" href="">Contact</a>
+    </div>
+    <div class ="loginicon marginnpadding">
+      <!-- <a class="navlnk" href=""> IDface</a> -->
+      <img id="proicon" src="{% static 'projone/3917711.svg' %}" alt="profile" width="20" height="20" >
+    </div>
+  </div>
+  <a href="{% url 'account_login' %}"> Log In </a>
+</div>
+
+{% endblock %}

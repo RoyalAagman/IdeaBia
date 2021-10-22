@@ -9,6 +9,8 @@ class Post(models.Model):
     # For Image to be added 
     author = models.ForeignKey(User , on_delete= models.CASCADE,)
     # author added : to display the name the name of user who has posted the post
+    date = models.DateTimeField(auto_now=True)
+    # date field added : to display the date the post was added
 
     # function added to display text on the database table inside admin block
     def __str__(self):

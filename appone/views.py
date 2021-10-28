@@ -13,7 +13,7 @@ class HomePageView(TemplateView):
 class PostView(FormView):
     template_name = "new_post.html"
     form_class = AddForm
-    success_url = 'home/'
+    success_url = '/home/'
 
     def form_valid(self, form):
         new_object = Post.objects.create(

@@ -3,11 +3,11 @@ from sorl.thumbnail import ImageField
 from django.contrib.auth.models import User
 
 class Post(models.Model):
-    text = models.CharField(max_length = 150, blank = True, null = True) 
+    text = models.CharField(max_length = 150, blank = False, null = False) 
     # caption for Image to be added
     image = ImageField()
     # For Image to be added 
-    author = models.ForeignKey(User , on_delete= models.CASCADE, null=True)
+    author = models.ForeignKey(User , on_delete= models.CASCADE, null=False)
     # author added : to display the name the name of user who has posted the post
     date = models.DateTimeField(auto_now=True)
     # date field added : to display the date the post was added

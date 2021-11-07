@@ -1,14 +1,17 @@
 from django.views.generic import TemplateView, FormView
 from .models import Post
 from .Forms import AddForm
+from django.contrib.auth.models import User
+
 
 class HomePageView(TemplateView):
     template_name = "home.html"
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.all()
-        return context 
+        return context
+
 
 class PostView(FormView):
     template_name = "new_post.html"
@@ -17,10 +20,12 @@ class PostView(FormView):
 
     def form_valid(self, form):
         new_object = Post.objects.create(
-            text = form.cleaned_data['text'],
-            image = form.cleaned_data['image']
+            text=form.cleaned_data['text'],
+            image=form.cleaned_data['image'],
+            author=User.objects.get(id=form.cleaned_data['id']),
         )
         return super().form_valid(form)
+
 
 class MainPageView(TemplateView):
     template_name = "mainpage.html"

@@ -1,7 +1,9 @@
+{% if request.user.is_authenticated %}
 <form method="POST" action="" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p}}
-    <div>
-        <button type="submit">SUBMIT</button>
-    </div>
-
+  {% csrf_token %} {{ form.as_p}}
+  <div>
+    <button type="submit">SUBMIT</button>
+  </div>
+  <p>{{request.user.id}}</p>
+</form>
+{% endif %}

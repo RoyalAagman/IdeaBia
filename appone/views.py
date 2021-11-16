@@ -2,6 +2,7 @@ from django.views.generic import TemplateView, FormView
 from .models import Post
 from .Forms import AddForm
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class HomePageView(TemplateView):
@@ -13,16 +14,20 @@ class HomePageView(TemplateView):
         return context
 
 
-class PostView(FormView):
+class PostView(LoginRequiredMixin, FormView):
     template_name = "new_post.html"
     form_class = AddForm
     success_url = '/home/'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.request = request
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         new_object = Post.objects.create(
             text=form.cleaned_data['text'],
             image=form.cleaned_data['image'],
-            author=User.objects.get(id=form.cleaned_data['id']),
+            author=self.request.user,
         )
         return super().form_valid(form)
 
